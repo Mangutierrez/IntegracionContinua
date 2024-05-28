@@ -1,0 +1,3 @@
+FROM mysql:latest
+ENV MYSQL_ROOT_PASSWORD db_mypassword
+ENV MYSQL_DATABASE web_db
