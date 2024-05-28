@@ -1,0 +1,23 @@
+services:
+  web:
+    image: nginx:stable-alpine
+    container_name: web
+    ports:
+      - "8080:80"
+    networks:
+      - app_network
+    volumes:
+      - ./:/usr/share/nginx/html
+
+  db:
+    image: mysql:latest
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: db_mypassword
+      MYSQL_DATABASE: web_db
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
