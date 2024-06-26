@@ -1,3 +1,3 @@
-FROM mysql:latest
+FROM mysql:5.7
 ENV MYSQL_ROOT_PASSWORD db_mypassword
 ENV MYSQL_DATABASE web_db
