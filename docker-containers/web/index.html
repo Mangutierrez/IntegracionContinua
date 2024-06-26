@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flavors and Secrets</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Welcome to Flavors and Secrets</h1>
+  </div>
+  <div class="container" id="recipe-container">
+  </div>
+  <div class="footer">
+    &copy; 2024 Flavors and Secrets. All rights reserved.
+  </div>
+  <script>
+    function fetchRecipes() {
+      fetch('http://localhost:3000/recipes')
+        .then(response => response.json())
+        .then(data => {
+          const container = document.getElementById('recipe-container');
+          container.innerHTML = '';
+          data.forEach(recipe => {
+            const recipeDiv = document.createElement('div');
+            recipeDiv.className = 'recipe';
+            recipeDiv.innerHTML = `
+              <img src="${recipe.imageUrl}" alt="${recipe.title}">
+              <div class="recipe-details">
+                <h2>${recipe.title}</h2>
+                <h3>Ingredients:</h3>
+                <ul>${recipe.ingredients.split(', ').map(ing => `<li>${ing}</li>`).join('')}</ul>
+                <h3>Instructions:</h3>
+                <p>${recipe.instructions}</p>
+                <p><strong>Duration:</strong> ${recipe.duration}</p>
+              </div>
+            `;
+            container.appendChild(recipeDiv);
+          });
+        })
+        .catch(error => console.error('Error fetching recipes:', error));
+    }
+    window.onload = fetchRecipes;
+  </script>
+</body>
+</html>
