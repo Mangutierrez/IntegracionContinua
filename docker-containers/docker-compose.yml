@@ -1,3 +1,5 @@
+version: '3'
+
 services:
   web:
     image: nginx:stable-alpine
@@ -47,6 +49,8 @@ services:
     depends_on:
       - db
       - backend
+    deploy:
+      replicas: ${JENKINS_REPLICAS:-1}
 
 networks:
   app_network:
